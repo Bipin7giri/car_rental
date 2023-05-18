@@ -18,8 +18,9 @@ export class location extends SoftDelete {
     type: 'enum',
     enum: LocationEnum,
     default: LocationEnum.InsideValley,
+    name: 'location_info',
   })
-  seater: LocationEnum;
+  locationInfo: LocationEnum;
 
   @OneToMany(() => Vehicle, (v) => v.locationId)
   vehicleId: Vehicle[];

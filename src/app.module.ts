@@ -8,6 +8,7 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
 import { CategoriesModule } from './categories/categories.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { LocationsModule } from './locations/locations.module';
+import { BookingsModule } from './bookings/bookings.module';
 @Module({
   imports: [
     NestjsFormDataModule,
@@ -33,6 +34,7 @@ import { LocationsModule } from './locations/locations.module';
     CategoriesModule,
     VehiclesModule,
     LocationsModule,
+    BookingsModule,
   ],
   controllers: [],
   providers: [],

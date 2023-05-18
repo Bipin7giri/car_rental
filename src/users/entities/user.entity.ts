@@ -12,6 +12,7 @@ import { Role } from 'src/AllEntites';
 import { SoftDelete } from 'src/AllEntites/HelperEntites/SoftDelete.entites';
 import { UserCredential } from 'src/users/entities/UserCredential.entities';
 import { Gender } from 'src/helper/enums/Users.enum';
+import { Bookings } from 'src/bookings/entities/booking.entity';
 @Entity()
 export class User extends SoftDelete {
   @PrimaryGeneratedColumn({
@@ -59,6 +60,9 @@ export class User extends SoftDelete {
   @ManyToOne(() => Role, (role) => role.userId)
   @JoinColumn({ name: 'role_id' })
   roleId: Role;
+
+  @OneToMany(() => Bookings, (booking) => booking.customerId)
+  bookingId: Bookings;
 
   @OneToOne(() => UserCredential, (uc) => uc.userId)
   @JoinColumn({ name: 'user_credential_id' })

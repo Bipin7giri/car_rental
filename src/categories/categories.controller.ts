@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Request,
   ValidationPipe,
   UsePipes,
 } from '@nestjs/common';
@@ -28,7 +27,7 @@ export class CategoriesController {
   }
 
   @Get()
-  findAll(@Paginate() query: PaginateQuery, @Request() req) {
+  findAll(@Paginate() query: PaginateQuery) {
     return this.categoriesService.findAll(query);
   }
 
