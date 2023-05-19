@@ -15,10 +15,7 @@ import { Gender } from 'src/helper/enums/Users.enum';
 import { Bookings } from 'src/bookings/entities/booking.entity';
 @Entity()
 export class User extends SoftDelete {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-    name: 'user_id',
-  })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ name: 'full_name', nullable: true })
@@ -68,5 +65,3 @@ export class User extends SoftDelete {
   @JoinColumn({ name: 'user_credential_id' })
   userCredentialId: UserCredential;
 }
-
-export { Role };

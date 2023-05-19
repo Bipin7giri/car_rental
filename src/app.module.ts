@@ -9,6 +9,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { LocationsModule } from './locations/locations.module';
 import { BookingsModule } from './bookings/bookings.module';
+import { PaymentsModule } from './payments/payments.module';
 @Module({
   imports: [
     NestjsFormDataModule,
@@ -35,6 +36,7 @@ import { BookingsModule } from './bookings/bookings.module';
     VehiclesModule,
     LocationsModule,
     BookingsModule,
+    PaymentsModule,
   ],
   controllers: [],
   providers: [],

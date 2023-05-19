@@ -13,7 +13,8 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from 'src/auth/current-user.decorator';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('bookings')
 @Controller('bookings')
 export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
@@ -22,6 +23,11 @@ export class BookingsController {
   @UseGuards(AuthGuard('jwt'))
   create(@Body() createBookingDto: CreateBookingDto, @CurrentUser() user: any) {
     return this.bookingsService.create(createBookingDto, user);
+  }
+  @Get('/mine')
+  @UseGuards(AuthGuard('jwt'))
+  findMineHistory(@CurrentUser() user: any) {
+    return this.bookingsService.findMine(user);
   }
 
   @Get()

@@ -5,7 +5,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Bookings } from './entities/booking.entity';
 import { Repository } from 'typeorm';
 import { Vehicle } from 'src/vehicles/entities/vehicle.entity';
-
+import { User } from 'src/AllEntites';
+interface UserDecode {
+  userId: number;
+}
 @Injectable()
 export class BookingsService {
   constructor(
@@ -13,16 +16,22 @@ export class BookingsService {
     private readonly bookingRepository: Repository<Bookings>,
     @InjectRepository(Vehicle)
     private readonly vehicleRepository: Repository<Vehicle>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
   async create(createBookingDto: CreateBookingDto, user: any): Promise<any> {
     const vehicleId: any = createBookingDto.vehicleId;
     const costPerDay: any = await this.vehicleRepository.findOne({
       where: {
         id: vehicleId,
+        deleted: false,
       },
       select: {
         rentalRatePerDay: true,
       },
+    });
+    await this.vehicleRepository.update(vehicleId, {
+      availabilityStatus: true,
     });
     const rentalStartDate = new Date(createBookingDto.rentalStartDate);
     const rentalEndDate = new Date(createBookingDto.rentalEndDate);
@@ -40,18 +49,32 @@ export class BookingsService {
   }
 
   findAll() {
-    return `This action returns all bookings`;
+    return this.bookingRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} booking`;
+  findOne(id: number): Promise<Bookings> {
+    return this.bookingRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
   }
 
+  async findMine(user: any): Promise<any> {
+    const bookings = await this.bookingRepository.find({
+      where: {
+        customerId: {
+          id: user.userId,
+        },
+      },
+    });
+    return bookings;
+  }
   update(id: number, updateBookingDto: UpdateBookingDto) {
     return `This action updates a #${id} booking`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} booking`;
+    return this.bookingRepository.update(id, { deleted: true });
   }
 }

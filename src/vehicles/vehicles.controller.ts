@@ -47,6 +47,11 @@ export class VehiclesController {
     return this.vehiclesService.findAll(query);
   }
 
+  @Get('/active')
+  findActive(@Paginate() query: PaginateQuery, @Request() req) {
+    return this.vehiclesService.findActive(query);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.vehiclesService.findOne(+id);

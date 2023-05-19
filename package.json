@@ -38,6 +38,7 @@
     "cloudinary": "^1.35.0",
     "dotenv": "^16.0.3",
     "multer": "^1.4.5-lts.1",
+    "nest": "^0.1.6",
     "nestjs-form-data": "^1.8.7",
     "nestjs-paginate": "^4.12.1",
     "passport": "^0.6.0",

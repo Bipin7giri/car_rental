@@ -47,8 +47,8 @@ export class UsersController {
     private imageUploadService: ImageUploadSerive,
   ) {}
 
-  @HasRoles(Role.Admin)
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @HasRoles(Role.Admin)
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Get('/all')
   getUsers(@Paginate() query: PaginateQuery, @Request() req) {
     console.log(req);

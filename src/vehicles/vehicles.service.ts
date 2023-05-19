@@ -35,6 +35,46 @@ export class VehiclesService {
         'rentalRatePerDay',
       ],
       where: { deleted: false },
+      select: [
+        'availabilityStatus',
+        'color',
+        'year',
+        'make',
+        'name',
+        'rentalRatePerDay',
+      ],
+      relations: ['categoryId'],
+      nullSort: 'last',
+      searchableColumns: ['name', 'color'],
+      defaultSortBy: [['id', 'DESC']],
+      filterableColumns: {
+        rentalRatePerDay: [
+          FilterOperator.GTE,
+          FilterOperator.EQ,
+          FilterOperator.LTE,
+          FilterSuffix.NOT,
+        ],
+      },
+    });
+  }
+  findActive(query: PaginateQuery): Promise<Paginated<Vehicle>> {
+    return paginate(query, this.vehicleRepository, {
+      sortableColumns: [
+        'id',
+        'name',
+        'color',
+        'availabilityStatus',
+        'rentalRatePerDay',
+      ],
+      where: { deleted: false, availabilityStatus: false },
+      select: [
+        'availabilityStatus',
+        'color',
+        'year',
+        'make',
+        'name',
+        'rentalRatePerDay',
+      ],
       relations: ['categoryId'],
       nullSort: 'last',
       searchableColumns: ['name', 'color'],
