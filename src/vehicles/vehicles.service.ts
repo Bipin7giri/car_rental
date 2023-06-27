@@ -99,8 +99,19 @@ export class VehiclesService {
     });
   }
 
-  update(id: number, updateVehicleDto: UpdateVehicleDto) {
+  update(id: number, updateVehicleDto: UpdateVehicleDto, imageUrl?: any) {
+    if (imageUrl) {
+      return this.vehicleRepository.update(+id, {
+        image: imageUrl,
+      });
+    }
     return this.vehicleRepository.update(id, updateVehicleDto);
+  }
+
+  updateImage(id: number, imageUrl: any) {
+    return this.vehicleRepository.update(id, {
+      image: imageUrl,
+    });
   }
 
   remove(id: number) {

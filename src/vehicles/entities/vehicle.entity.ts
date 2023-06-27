@@ -13,10 +13,7 @@ import {
 } from 'typeorm';
 @Entity()
 export class Vehicle extends SoftDelete {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-    name: 'id',
-  })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
